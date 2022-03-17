@@ -5,7 +5,7 @@
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
-    "start": "concurrently \"npm:svelte-dev\" \"electron-forge start\"",
+    "start": "concurrently \"npm:svelte-dev\" \"electron-forge start\" \"npm:watch:tailwind\"",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -13,7 +13,9 @@
     "svelte-build": "rollup -c",
     "svelte-dev": "rollup -c -w",
     "svelte-start": "sirv public --no-clear",
-    "svelte-check": "svelte-check --tsconfig ./tsconfig.json"
+    "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
+    "watch:tailwind": "postcss public/tailwind.css -o public/index.css -w",
+    "build:tailwind": "cross-env NODE_ENV=production postcss public/tailwind.css -o public/index.css"
   },
   "keywords": [],
   "author": {
