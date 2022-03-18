@@ -89,6 +89,6 @@ typings/
 out/
 
 public/index.css
-public/build/bundle.css
 public/build/bundle.js
 public/build/bundle.js.map
+prisma/rekuebox.db

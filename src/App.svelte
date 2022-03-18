@@ -1,11 +1,5 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { createDatabase } from "../utils/database";
 	export let name: string;
-
-	onMount(() => {
-		createDatabase();
-	});
 </script>
 
 <main>
