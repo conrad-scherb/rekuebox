@@ -1,4 +1,3 @@
-const production = !process.env.ROLLUP_WATCH;
 module.exports = {
     future: {
         purgeLayersByDefault: true,
@@ -6,8 +5,5 @@ module.exports = {
     },
     plugins: [
     ],
-    purge: {
-        content: ['./src/**/*.{html,js,svelte,ts}'],
-        enabled: production // disable purge in dev
-    },
+    content: ['./src/**/*.{html,js,svelte,ts}'],
 };

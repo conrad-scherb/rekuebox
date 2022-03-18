@@ -15,8 +15,8 @@
     "svelte-start": "sirv public --no-clear",
     "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
     "electron-start": "electron-forge start",
-    "tailwind-watch": "postcss public/tailwind.css -o public/index.css -w",
-    "tailwind-build": "cross-env NODE_ENV=production postcss public/tailwind.css -o public/index.css"
+    "tailwind-watch": "postcss public/tailwind.css -o public/build/index.css -w",
+    "tailwind-build": "postcss public/tailwind.css -o public/build/index.css"
   },
   "keywords": [],
   "author": {

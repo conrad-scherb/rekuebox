@@ -91,4 +91,5 @@ out/
 public/index.css
 public/build/bundle.js
 public/build/bundle.js.map
+public/build/index.css
 prisma/rekuebox.db
