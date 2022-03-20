@@ -1,11 +1,22 @@
 <script lang="ts">
-	export let name: string;
+	import Content from "./components/Content.svelte";
+	import HeaderMenu from "./components/HeaderMenu.svelte";
+
+	const tabs = ["Autocue", "Collection", "Settings"];
+	let selectedTab = "";
+
+	const isXmlLoaded = true;
 </script>
 
 <main>
-	<h1 class="bg-blue-400">Hello {name}!</h1>
-	<p>
-		Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-		how to build Svelte apps.
-	</p>
+	<div class="flex flex-col">
+		<HeaderMenu {tabs} {selectedTab} disabled={!isXmlLoaded} />
+		<Content />
+	</div>
 </main>
+
+<style>
+	main {
+		user-select: none;
+	}
+</style>
