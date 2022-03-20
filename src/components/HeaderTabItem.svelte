@@ -15,6 +15,6 @@
 
 <style>
     .hover-tab:hover {
-        color: rgb(14 165 233) !important;
+        color: rgb(14 165 233);
     }
 </style>

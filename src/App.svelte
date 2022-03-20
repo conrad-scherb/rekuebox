@@ -9,7 +9,7 @@
 </script>
 
 <main>
-	<div class="flex flex-col">
+	<div class="flex flex-col h-full">
 		<HeaderMenu {tabs} {selectedTab} disabled={!isXmlLoaded} />
 		<Content />
 	</div>
@@ -17,6 +17,7 @@
 
 <style>
 	main {
+		height: 100vh;
 		user-select: none;
 	}
 </style>
