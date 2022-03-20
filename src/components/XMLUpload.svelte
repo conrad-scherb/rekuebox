@@ -1,6 +1,7 @@
 <script>
     // TODO: Typescriptify this file by creating a types file for the library
     import Dropzone from "svelte-file-dropzone";
+    import { xmlToJson } from "../utils/xml-utils";
 
     let state = "";
 
@@ -13,6 +14,11 @@
 
         // Start processing the file
         state = "processing";
+        let reader = new FileReader();
+        reader.addEventListener("load", (event) => {
+            console.log(xmlToJson(event.target.result));
+        });
+        reader.readAsText(acceptedFiles[0]);
     }
 </script>
 
