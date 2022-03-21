@@ -1,14 +1,12 @@
 const Database = require("better-sqlite3");
-const db = new Database('prisma/rekuebox.db', { verbose: console.log })
+const { contextBridge, ipcRenderer } = require("electron");
 
-/*
-const query = db.prepare(`CREATE TABLE IF contacts (
-    contact_id INTEGER PRIMARY KEY,
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    phone TEXT NOT NULL UNIQUE
-)`);
+// Create a database
+new Database('prisma/rekuebox.db')
 
-query.run();*/
+window.ipcRenderer = require('electron').ipcRenderer;
+// Expose Prisma db commands to renderer
+contextBridge.exposeInMainWorld('ipcRenderer', {
+    importRekordboxXmlJson: (xmlJson) => ipcRenderer.invoke("importRekordboxXmlJson", xmlJson)
+})
 

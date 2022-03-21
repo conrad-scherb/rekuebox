@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -12,7 +12,8 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.ts')
+      nodeIntegration: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
@@ -26,7 +27,12 @@ const createWindow = () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+  ipcMain.handle("importRekordboxXmlJson", async (_, ...args) => {
+    console.log(args);
+  });
+});
 
 app.on('window-all-closed', () => {
   app.quit();
