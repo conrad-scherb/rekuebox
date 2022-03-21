@@ -52,6 +52,7 @@
     }
   },
   "dependencies": {
+    "@prisma/client": "^3.11.0",
     "better-sqlite3": "^7.5.0",
     "concurrently": "^7.0.0",
     "electron-reload": "^2.0.0-alpha.1",
