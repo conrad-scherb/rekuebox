@@ -14,3 +14,58 @@ model contacts {
   email      String @unique(map: "sqlite_autoindex_contacts_1")
   phone      String @unique(map: "sqlite_autoindex_contacts_2")
 }
+
+model rekordboxXMLData {
+  id           Int         @id @default(autoincrement())
+  xml          String
+  DJ_PLAYLISTS DJPlaylist?
+}
+
+model DJPlaylist {
+  id                 Int              @id @default(autoincrement())
+  source             rekordboxXMLData @relation(fields: [rekordboxXMLDataId], references: [id])
+  rekordboxXMLDataId Int              @unique
+  PRODUCT            String
+  Version            String
+  COLLECTION         Collection?
+}
+
+model Collection {
+  id           Int        @id @default(autoincrement())
+  source       DJPlaylist @relation(fields: [djPlaylistId], references: [id])
+  djPlaylistId Int        @unique
+  TRACK        Track[]
+}
+
+model Track {
+  id            Int         @id @default(autoincrement())
+  Collection    Collection? @relation(fields: [collectionId], references: [id])
+  collectionId  Int         @unique
+  TrackID       String
+  Name          String
+  Artist        String
+  Composer      String
+  Album         String
+  Grouping      String
+  Genre         String
+  Kind          String
+  Size          String
+  TotalTime     String
+  DiscNumber    String
+  TrackNumber   String
+  Year          String
+  AverageBpm    String
+  DateAdded     String
+  BitRate       String
+  SampleRate    String
+  Comments      String
+  PlayCount     String
+  Rating        String
+  Location      String
+  Remixer       String
+  Tonality      String
+  Label         String
+  Mix           String
+  TEMPO         String
+  POSITION_MARK String
+}

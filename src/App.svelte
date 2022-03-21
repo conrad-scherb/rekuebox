@@ -2,16 +2,12 @@
 	import Content from "./components/Content.svelte";
 	import HeaderMenu from "./components/HeaderMenu.svelte";
 	import { userStore } from "./utils/store";
-	import type { Store } from "./utils/store";
 
 	const tabs = ["Autocue", "Collection", "Settings"];
 
 	let selectedTab = "";
-	let isXmlLoaded = false;
 
-	userStore.subscribe((storeValue: Store) => {
-		isXmlLoaded = storeValue.xml !== undefined;
-	});
+	$: isXmlLoaded = $userStore.xml !== undefined;
 </script>
 
 <main>

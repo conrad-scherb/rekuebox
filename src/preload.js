@@ -11,3 +11,4 @@ const query = db.prepare(`CREATE TABLE IF contacts (
 )`);
 
 query.run();*/
+
