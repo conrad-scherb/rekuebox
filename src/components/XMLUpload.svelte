@@ -25,7 +25,7 @@
             }
 
             userStore.set({ xml: res });
-            await sendJsonToDB(res);
+            sendJsonToDB(res);
         });
         reader.readAsText(acceptedFiles[0]);
     }

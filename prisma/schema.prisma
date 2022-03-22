@@ -7,14 +7,6 @@ datasource db {
   url      = "file:./rekuebox.db"
 }
 
-model contacts {
-  contact_id Int    @id @default(autoincrement())
-  first_name String
-  last_name  String
-  email      String @unique(map: "sqlite_autoindex_contacts_1")
-  phone      String @unique(map: "sqlite_autoindex_contacts_2")
-}
-
 model rekordboxXMLData {
   id           Int         @id @default(autoincrement())
   xml          String
@@ -40,7 +32,7 @@ model Collection {
 model Track {
   id            Int         @id @default(autoincrement())
   Collection    Collection? @relation(fields: [collectionId], references: [id])
-  collectionId  Int         @unique
+  collectionId  Int
   TrackID       String
   Name          String
   Artist        String

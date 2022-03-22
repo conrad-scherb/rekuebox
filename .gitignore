@@ -97,3 +97,4 @@ prisma/rekuebox.db
 prisma/rekordbox.db-journal
 
 dist/
+prisma/rekuebox.db-journal

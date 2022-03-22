@@ -37,6 +37,6 @@ export async function xmlToJson(xmlData: string): Promise<RekordboxXmlJson | nul
     return jsonObj;
 }
 
-export async function sendJsonToDB(json: RekordboxXmlJson): Promise<boolean> {
-    return await ipcRenderer.importRekordboxXmlJson(json);
+export async function sendJsonToDB(json: RekordboxXmlJson): Promise<void> {
+    await ipcRenderer.importRekordboxXmlJson(json);
 }
