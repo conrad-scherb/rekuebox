@@ -1,11 +1,12 @@
 import { PrismaClient } from '@prisma/client';
-import type { RekordboxXmlJson } from './xml-interfaces';
+import type { RekordboxXmlJson } from '../shared/xml-interfaces';
 
 type PrismaSingleton = {
     (): PrismaClient;
     client?: PrismaClient;
 }
 
+// Use this function to ensure only 1 Prism client will be created
 export const getPrismaClient: PrismaSingleton = Object.assign(
     () => {
         if (getPrismaClient.client === undefined) {
@@ -58,3 +59,9 @@ export async function addRekordboxXmlToDb(rekordboxXml: RekordboxXmlJson) {
     }
 }
 
+export async function isXMLTableEmpty() {
+    const client = getPrismaClient();
+
+    const count = await client.rekordboxXMLData.count();
+    return count === 0;
+}

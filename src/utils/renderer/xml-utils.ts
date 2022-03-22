@@ -1,19 +1,7 @@
 
 
 import { XMLParser } from "fast-xml-parser";
-import type { RekordboxXmlJson } from "./xml-interfaces";
-
-declare global {
-    interface Window {
-        ipcRenderer: IpcRenderer
-    }
-
-    interface IpcRenderer {
-        importRekordboxXmlJson: (json: RekordboxXmlJson) => Promise<boolean>
-    }
-}
-
-export const { ipcRenderer } = window;
+import type { RekordboxXmlJson } from "../shared/xml-interfaces";
 
 const parserOptions = {
     attributeNamePrefix: "",
@@ -32,11 +20,5 @@ export async function xmlToJson(xmlData: string): Promise<RekordboxXmlJson | nul
         return null;
     }
 
-    ipcRenderer.importRekordboxXmlJson(jsonObj);
-
     return jsonObj;
-}
-
-export async function sendJsonToDB(json: RekordboxXmlJson): Promise<void> {
-    await ipcRenderer.importRekordboxXmlJson(json);
 }

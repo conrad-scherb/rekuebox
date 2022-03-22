@@ -1,6 +1,6 @@
 <script lang="ts">
     import XmlUpload from "./XMLUpload.svelte";
-    import { userStore } from "../utils/store";
+    import { userStore } from "../utils/renderer/store";
 
     $: isXmlLoaded = $userStore.xml !== undefined;
 </script>

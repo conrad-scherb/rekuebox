@@ -1,4 +1,4 @@
-import type { RekordboxXmlJson } from "./xml-interfaces";
+import type { RekordboxXmlJson } from "../shared/xml-interfaces";
 import { Writable, writable } from "svelte/store";
 
 export interface Store {

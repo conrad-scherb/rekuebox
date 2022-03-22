@@ -1,8 +1,9 @@
 <script>
     // TODO: Typescriptify this file by creating a types file for the library
     import Dropzone from "svelte-file-dropzone";
-    import { userStore } from "../utils/store";
-    import { sendJsonToDB, xmlToJson } from "../utils/xml-utils";
+    import { userStore } from "../utils/renderer/store";
+    import { xmlToJson } from "../utils/renderer/xml-utils";
+    import { ipcSendJsonToDb } from "../utils/renderer/ipc-renderer";
 
     let state = "";
 
@@ -25,7 +26,7 @@
             }
 
             userStore.set({ xml: res });
-            sendJsonToDB(res);
+            ipcSendJsonToDb(res);
         });
         reader.readAsText(acceptedFiles[0]);
     }

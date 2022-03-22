@@ -1,6 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import { addRekordboxXmlToDb } from './utils/db-utils';
+import { addRekordboxXmlToDb } from './utils/electron/db-utils';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -31,7 +31,6 @@ const createWindow = () => {
 app.on('ready', () => {
   createWindow();
   ipcMain.handle("importRekordboxXmlJson", async (_, ...args) => {
-    console.log(args);
     addRekordboxXmlToDb(args[0]);
   });
 });

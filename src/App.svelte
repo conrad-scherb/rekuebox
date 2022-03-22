@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Content from "./components/Content.svelte";
 	import HeaderMenu from "./components/HeaderMenu.svelte";
-	import { userStore } from "./utils/store";
+	import { userStore } from "./utils/renderer/store";
 
 	const tabs = ["Autocue", "Collection", "Settings"];
 
