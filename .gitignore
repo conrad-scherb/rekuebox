@@ -88,13 +88,16 @@ typings/
 # Electron-Forge
 out/
 
+# tsc
+dist/
+
 public/index.css
 public/build/bundle.js
 public/build/bundle.js.map
 public/build/bundle.css
 public/build/index.css
-prisma/rekuebox.db
-prisma/rekordbox.db-journal
 
-dist/
+prisma/rekuebox.db
 prisma/rekuebox.db-journal
+
+./rekordbox.xml
