@@ -3,7 +3,7 @@
   "productName": "rekuebox",
   "version": "1.0.0",
   "description": "My Electron application description",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "concurrently \"npm:svelte-dev\" \"npm:electron-start\" \"npm:tailwind-watch\"",
     "package": "electron-forge package",
@@ -14,7 +14,7 @@
     "svelte-dev": "rollup -c -w",
     "svelte-start": "sirv public --no-clear",
     "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
-    "electron-build": "npx tsc",
+    "electron-build": "npx tsc --project tsconfig.electron.json",
     "electron-start": "npm run electron-build && electron-forge start",
     "tailwind-watch": "postcss public/tailwind.css -o public/build/index.css -w",
     "tailwind-build": "postcss public/tailwind.css -o public/build/index.css"

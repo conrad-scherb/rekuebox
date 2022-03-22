@@ -31,6 +31,7 @@ const createWindow = () => {
 app.on('ready', () => {
   createWindow();
   ipcMain.handle("importRekordboxXmlJson", async (_, ...args) => {
+    console.log(args);
     addRekordboxXmlToDb(args[0]);
   });
 });
