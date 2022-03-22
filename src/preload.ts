@@ -7,6 +7,7 @@ new Database('prisma/rekuebox.db')
 
 // Expose Prisma db commands to renderer
 contextBridge.exposeInMainWorld('ipcRenderer', {
-    importRekordboxXmlJson: (xmlJson: RekordboxXmlJson) => ipcRenderer.invoke("importRekordboxXmlJson", xmlJson)
+    importRekordboxXmlJson: (xmlJson: RekordboxXmlJson) => ipcRenderer.invoke("importRekordboxXmlJson", xmlJson),
+    loadJsonFromDb: () => ipcRenderer.invoke("loadJsonFromDb")
 })
 

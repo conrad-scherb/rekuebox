@@ -3,7 +3,10 @@
     import Dropzone from "svelte-file-dropzone";
     import { userStore } from "../utils/renderer/store";
     import { xmlToJson } from "../utils/renderer/xml-utils";
-    import { ipcSendJsonToDb } from "../utils/renderer/ipc-renderer";
+    import {
+        ipcLoadJsonFromDb,
+        ipcSendJsonToDb,
+    } from "../utils/renderer/ipc-renderer";
 
     let state = "";
 
@@ -25,8 +28,10 @@
                 return;
             }
 
-            userStore.set({ xml: res });
-            ipcSendJsonToDb(res);
+            //userStore.set({ xml: res });
+            //ipcSendJsonToDb(res);
+            const result = await ipcLoadJsonFromDb();
+            console.log(result);
         });
         reader.readAsText(acceptedFiles[0]);
     }
