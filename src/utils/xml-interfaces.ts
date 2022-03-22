@@ -95,6 +95,6 @@ export interface DJPlaylists {
 }
 
 export interface RekordboxXmlJson {
-    xml: Xml;
+    "?xml": Xml;
     DJ_PLAYLISTS: DJPlaylists;
 }

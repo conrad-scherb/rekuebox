@@ -2,7 +2,7 @@
     // TODO: Typescriptify this file by creating a types file for the library
     import Dropzone from "svelte-file-dropzone";
     import { userStore } from "../utils/store";
-    import { xmlToJson } from "../utils/xml-utils";
+    import { sendJsonToDB, xmlToJson } from "../utils/xml-utils";
 
     let state = "";
 
@@ -16,7 +16,7 @@
         // Start processing the file
         state = "processing";
         let reader = new FileReader();
-        reader.addEventListener("load", (event) => {
+        reader.addEventListener("load", async (event) => {
             let res = xmlToJson(event.target.result);
 
             if (!res) {
@@ -25,6 +25,7 @@
             }
 
             userStore.set({ xml: res });
+            await sendJsonToDB(res);
         });
         reader.readAsText(acceptedFiles[0]);
     }

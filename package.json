@@ -72,6 +72,7 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
     "@tsconfig/svelte": "^2.0.1",
+    "@types/better-sqlite3": "^7.5.0",
     "electron": "17.1.2",
     "prisma": "^3.11.0",
     "rollup": "^2.3.4",
