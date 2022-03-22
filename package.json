@@ -14,7 +14,8 @@
     "svelte-dev": "rollup -c -w",
     "svelte-start": "sirv public --no-clear",
     "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
-    "electron-start": "electron-forge start",
+    "electron-build": "npx tsc",
+    "electron-start": "npm run electron-build && electron-forge start",
     "tailwind-watch": "postcss public/tailwind.css -o public/build/index.css -w",
     "tailwind-build": "postcss public/tailwind.css -o public/build/index.css"
   },

@@ -12,7 +12,7 @@
     "types": [
       "node",
       "svelte"
-    ]
+    ],
+    "outDir": "dist"
   },
-  "outDir": "dist"
 }

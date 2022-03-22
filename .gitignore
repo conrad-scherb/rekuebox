@@ -95,3 +95,5 @@ public/build/bundle.css
 public/build/index.css
 prisma/rekuebox.db
 prisma/rekordbox.db-journal
+
+dist/
