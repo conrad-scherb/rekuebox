@@ -9,7 +9,7 @@ declare global {
     }
 
     interface IpcRenderer {
-        importRekordboxXmlJson: (arg: string) => void
+        importRekordboxXmlJson: (json: RekordboxXmlJson) => Promise<boolean>
     }
 }
 
@@ -32,7 +32,11 @@ export async function xmlToJson(xmlData: string): Promise<RekordboxXmlJson | nul
         return null;
     }
 
-    ipcRenderer.importRekordboxXmlJson("test")
+    ipcRenderer.importRekordboxXmlJson(jsonObj);
 
     return jsonObj;
+}
+
+export async function sendJsonToDB(json: RekordboxXmlJson): Promise<boolean> {
+    return await ipcRenderer.importRekordboxXmlJson(json);
 }
