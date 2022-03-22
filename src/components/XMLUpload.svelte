@@ -1,7 +1,6 @@
-<script>
+<script lang="ts">
     // TODO: Typescriptify this file by creating a types file for the library
-    import Dropzone from "svelte-file-dropzone";
-    import { userStore } from "../utils/renderer/store";
+    import Dropzone, { DropResponse } from "svelte-file-dropzone";
     import { xmlToJson } from "../utils/renderer/xml-utils";
     import {
         ipcLoadJsonFromDb,
@@ -10,7 +9,7 @@
 
     let state = "";
 
-    function handleFilesSelect(e) {
+    function handleFilesSelect(e: DropResponse<File>) {
         const { acceptedFiles, fileRejections } = e.detail;
         if (fileRejections.length === 1) {
             state = "rejected";
@@ -21,7 +20,7 @@
         state = "processing";
         let reader = new FileReader();
         reader.addEventListener("load", async (event) => {
-            let res = xmlToJson(event.target.result);
+            let res = xmlToJson(event.target.result as string);
 
             if (!res) {
                 state = "rejected";

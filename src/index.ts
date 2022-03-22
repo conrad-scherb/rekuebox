@@ -1,6 +1,5 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import path from 'path';
-import { addRekordboxXmlToDb, loadJsonFromDb } from './utils/electron/db-utils';
 import { addIpcHandlers } from './utils/electron/ipc-main';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
