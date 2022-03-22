@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { addRekordboxXmlToDb, loadJsonFromDb } from './utils/electron/db-utils';
+import { addIpcHandlers } from './utils/electron/ipc-main';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -30,13 +31,7 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   createWindow();
-  ipcMain.handle("importRekordboxXmlJson", async (_, ...args) => {
-    addRekordboxXmlToDb(args[0]);
-  });
-
-  ipcMain.handle("loadJsonFromDb", async (): Promise<boolean> => {
-    return loadJsonFromDb();
-  });
+  addIpcHandlers();
 });
 
 app.on('window-all-closed', () => {
