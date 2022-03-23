@@ -1,38 +1,38 @@
 <script lang="ts">
-    // TODO: Typescriptify this file by creating a types file for the library
     import Dropzone, { DropResponse } from "svelte-file-dropzone";
     import { xmlToJson } from "../utils/renderer/xml-utils";
-    import {
-        ipcLoadJsonFromDb,
-        ipcSendJsonToDb,
-    } from "../utils/renderer/ipc-renderer";
+    import { ipcSendJsonToDb } from "../utils/renderer/ipc-renderer";
+    import { getFileContents } from "../utils/shared/file-utils";
+    import { userStore } from "../utils/renderer/store";
 
-    let state = "";
+    enum xmlLoadStates {
+        idle,
+        rejected,
+        loading,
+        loaded,
+    }
 
-    function handleFilesSelect(e: DropResponse<File>) {
+    let xmlLoadState: xmlLoadStates = xmlLoadStates.idle;
+
+    async function handleFilesSelect(e: DropResponse<File>) {
         const { acceptedFiles, fileRejections } = e.detail;
         if (fileRejections.length === 1) {
-            state = "rejected";
+            xmlLoadState = xmlLoadStates.rejected;
             return;
         }
 
-        // Start processing the file
-        state = "processing";
-        let reader = new FileReader();
-        reader.addEventListener("load", async (event) => {
-            let res = xmlToJson(event.target.result as string);
+        xmlLoadState = xmlLoadStates.loading;
 
-            if (!res) {
-                state = "rejected";
-                return;
-            }
+        let contents = await getFileContents(acceptedFiles[0]);
+        let xml = await xmlToJson(contents);
 
-            //userStore.set({ xml: res });
-            //ipcSendJsonToDb(res);
-            const result = await ipcLoadJsonFromDb();
-            console.log(result);
-        });
-        reader.readAsText(acceptedFiles[0]);
+        if (!xml) {
+            xmlLoadState = xmlLoadStates.rejected;
+            return;
+        }
+
+        userStore.set({ xml });
+        await ipcSendJsonToDb(xml);
     }
 </script>
 
@@ -55,7 +55,7 @@
                 File > Export collection in xml format.
             </p>
             <p class="text-red-500">
-                {#if state === "rejected"}
+                {#if xmlLoadState === xmlLoadStates.rejected}
                     Make sure you upload a file with the .xml extension.
                 {/if}
             </p>
