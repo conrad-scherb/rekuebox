@@ -1,0 +1,58 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Frontend",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "svelte-dev"
+            ],
+            "outputCapture": "std",
+            "presentation": {
+                "hidden": true
+            }
+        },
+        {
+            "name": "Electron",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "electron-start"
+            ],
+            "outputCapture": "std",
+            "presentation": {
+                "hidden": true
+            }
+        },
+        {
+            "name": "Tailwind Watcher",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "tailwind-watch"
+            ],
+            "outputCapture": "std",
+            "presentation": {
+                "hidden": true
+            }
+        },
+    ],
+    "compounds": [
+        {
+            "name": "rekuebox",
+            "configurations": [
+                "Frontend",
+                "Electron",
+                "Tailwind Watcher"
+            ],
+            "stopAll": true
+        }
+    ]
+}
