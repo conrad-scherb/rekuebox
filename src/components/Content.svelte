@@ -1,12 +1,27 @@
 <script lang="ts">
     import XmlUpload from "./XMLUpload.svelte";
     import { userStore } from "../utils/renderer/store";
+    import Toggle from "svelte-toggle";
+    import AutocueSection from "./AutocueSection.svelte";
 
     $: isXmlLoaded = $userStore.xml !== undefined;
+
+    let memoryCuesEnabled: boolean;
 </script>
 
 <div class="h-full">
     {#if !isXmlLoaded}
         <XmlUpload />
+    {:else}
+        <AutocueSection>
+            <div slot="header">
+                <div class="w-full flex flex-row content-center">
+                    <div class="text-bold mr-auto text-lg">Memory Cues</div>
+                    <Toggle label="" bind:toggled={memoryCuesEnabled} />
+                </div>
+            </div>
+
+            <div slot="content" />
+        </AutocueSection>
     {/if}
 </div>

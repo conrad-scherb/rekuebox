@@ -10,7 +10,7 @@
     }
 </script>
 
-<div class="h-12 p-4 flex items-center border-b border-slate-300">
+<div class="h-12 p-4 flex items-center border-b border-1 border-slate-300">
     <div class="text-2xl px-10 font-semibold">rekuebox</div>
 
     <div class="flex w-full justify-around">

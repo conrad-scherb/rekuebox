@@ -6,4 +6,9 @@ module.exports = {
     plugins: [
     ],
     content: ['./src/**/*.{html,js,svelte,ts}'],
+    theme: {
+        borderWidth: {
+            '1': '1px',
+        }
+    }
 };
