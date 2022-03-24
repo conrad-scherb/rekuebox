@@ -7,7 +7,7 @@ export function addIpcHandlers() {
         addRekordboxXmlToDb(args[0]);
     });
 
-    ipcMain.handle("loadJsonFromDb", async (): Promise<boolean> => {
+    ipcMain.handle("loadJsonFromDb", async (): Promise<RekordboxXmlJson> => {
         return loadJsonFromDb();
     });
 }

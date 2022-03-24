@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import type { RekordboxXmlJson } from '../shared/xml-interfaces';
+import type { PositionMark, Product, RekordboxXmlJson, Tempo, Xml } from '../shared/xml-interfaces';
 
 type PrismaSingleton = {
     (): PrismaClient;
@@ -59,9 +59,61 @@ export async function addRekordboxXmlToDb(rekordboxXml: RekordboxXmlJson) {
     }
 }
 
-export async function loadJsonFromDb() {
+export async function loadJsonFromDb(): Promise<RekordboxXmlJson> {
     const client = getPrismaClient();
 
-    const count = await client.rekordboxXMLData.count();
-    return count === 0;
+    const root = await client.rekordboxXMLData.findFirst({
+        orderBy: {
+            id: "desc"
+        }
+    });
+
+    const djPlaylist = await client.dJPlaylist.findUnique({
+        where: {
+            rekordboxXMLDataId: root.id
+        }
+    })
+
+    const collection = await client.collection.findUnique({
+        where: {
+            djPlaylistId: djPlaylist.id
+        }
+    })
+
+    const tracks = await client.track.findMany({
+        where: {
+            collectionId: collection.id
+        }
+    })
+
+    const json: RekordboxXmlJson = {
+        '?xml': JSON.parse(root.xml) as Xml,
+        DJ_PLAYLISTS: {
+            PRODUCT: JSON.parse(djPlaylist.PRODUCT) as Product,
+            PLAYLISTS: {
+                NODE: []
+            },
+            Version: djPlaylist.Version,
+            COLLECTION: {
+                TRACK: [],
+                Entries: "0"
+            }
+        }
+    }
+
+    for (const track of tracks) {
+        const tempo = JSON.parse(track.TEMPO) as Tempo[];
+        const positionMarks = JSON.parse(track.POSITION_MARK) as PositionMark[];
+
+        delete track.TEMPO;
+        delete track.POSITION_MARK;
+
+        json.DJ_PLAYLISTS.COLLECTION.TRACK.push({
+            ...track,
+            TEMPO: tempo,
+            POSITION_MARK: positionMarks
+        });
+    }
+
+    return json;
 }
