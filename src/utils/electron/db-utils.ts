@@ -59,7 +59,7 @@ export async function addRekordboxXmlToDb(rekordboxXml: RekordboxXmlJson) {
     }
 }
 
-export async function loadJsonFromDb(): Promise<RekordboxXmlJson> {
+export async function loadJsonFromDb(): Promise<RekordboxXmlJson | undefined> {
     const client = getPrismaClient();
 
     const root = await client.rekordboxXMLData.findFirst({
@@ -67,6 +67,10 @@ export async function loadJsonFromDb(): Promise<RekordboxXmlJson> {
             id: "desc"
         }
     });
+
+    if (!root) {
+        return undefined
+    }
 
     const djPlaylist = await client.dJPlaylist.findUnique({
         where: {

@@ -13,10 +13,9 @@
 	$: isXmlLoaded = $userStore.xml !== undefined;
 
 	onMount(async () => {
-		let json = await ipcLoadJsonFromDb();
-		if (json) {
-			userStore.set({ xml: json });
-			console.log(json);
+		let xml = await ipcLoadJsonFromDb();
+		if (xml) {
+			userStore.set({ xml: xml });
 		}
 	});
 </script>

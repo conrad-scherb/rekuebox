@@ -7,7 +7,7 @@ declare global {
 
     interface IpcRenderer {
         importRekordboxXmlJson: (json: RekordboxXmlJson) => Promise<boolean>
-        loadJsonFromDb: () => Promise<RekordboxXmlJson>
+        loadJsonFromDb: () => Promise<RekordboxXmlJson | undefined>
     }
 }
 
@@ -17,6 +17,6 @@ export async function ipcSendJsonToDb(json: RekordboxXmlJson): Promise<void> {
     await ipcRenderer.importRekordboxXmlJson(json);
 }
 
-export async function ipcLoadJsonFromDb(): Promise<RekordboxXmlJson> {
+export async function ipcLoadJsonFromDb(): Promise<RekordboxXmlJson | undefined> {
     return await ipcRenderer.loadJsonFromDb();
 }
