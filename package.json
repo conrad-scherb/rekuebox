@@ -15,9 +15,18 @@
     "svelte-start": "sirv public --no-clear",
     "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
     "electron-build": "npx tsc --project tsconfig.electron.json",
-    "electron-start": "npm run electron-build && electron-forge start",
+    "electron-start": "npm run electron-build && npm-watch electron-restart",
+    "electron-restart": "electron-forge start",
     "tailwind-watch": "postcss public/tailwind.css -o public/build/index.css -w",
     "tailwind-build": "postcss public/tailwind.css -o public/build/index.css"
+  },
+  "watch": {
+    "electron-restart": {
+      "patterns": [
+        "public/build"
+      ],
+      "extensions": "js,css"
+    }
   },
   "keywords": [],
   "author": {
@@ -75,6 +84,7 @@
     "@tsconfig/svelte": "^2.0.1",
     "@types/better-sqlite3": "^7.5.0",
     "electron": "17.1.2",
+    "npm-watch": "^0.11.0",
     "prisma": "^3.11.0",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
