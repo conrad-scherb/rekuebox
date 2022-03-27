@@ -4,9 +4,10 @@
     import Toggle from "svelte-toggle";
     import AutocueSection from "./AutocueSection.svelte";
 
-    $: isXmlLoaded = $userStore.xml !== undefined;
-
     let memoryCuesEnabled: boolean;
+    let memoryCueSpacing: string = "0";
+
+    $: isXmlLoaded = $userStore.xml !== undefined;
 </script>
 
 <div class="h-full">
@@ -18,6 +19,14 @@
                 <div class="w-full flex flex-row content-center">
                     <div class="text-bold mr-auto text-lg">Memory Cues</div>
                     <Toggle label="" bind:toggled={memoryCuesEnabled} />
+                </div>
+
+                <div class="text-sm">
+                    Memory Cue Spacing:
+                    <input
+                        class="border-blue-200 border-2 h-6 w-6 rounded-sm text-center"
+                        bind:value={memoryCueSpacing}
+                    />
                 </div>
             </div>
 
